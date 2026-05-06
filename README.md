@@ -1,205 +1,188 @@
-# 🚀 AI-Powered Multi-Platform Social Media Automation (n8n)
+# Social Media Workflow
 
-An advanced AI-driven social media automation workflow built using **n8n**.  
-This system automatically generates and publishes optimized content across multiple social platforms using Large Language Models (LLMs), structured JSON parsing, image generation, and API integrations.
+An AI-powered multi-platform social media automation system built with n8n, enabling automatic content generation and publishing across multiple social channels.
 
----
+## ✨ Key Features
 
-## 🧠 Overview
+- 🤖 **AI Content Generation** - Automatic content creation using LLMs
+- 📱 **Multi-Platform Support** - LinkedIn, Instagram, Facebook, Twitter, TikTok, Threads, YouTube Shorts
+- 🎨 **Image Generation** - AI-powered image creation for posts
+- 📅 **Scheduling** - Schedule posts for optimal engagement
+- ✅ **Approval Gate** - Review content before publishing
+- 📊 **Analytics** - Track performance and engagement
+- 🔐 **Secure Credentials** - Environment-based credential management
 
-This workflow:
+## 🛠️ Technology Stack
 
-1. Accepts a topic via a form trigger
-2. Uses AI models to generate structured, platform-specific content
-3. Optionally generates images
-4. Uploads media to IMGBB
-5. Publishes posts automatically to social media platforms
-6. Includes approval logic before publishing
+- **n8n** - Workflow automation platform
+- **Google Gemini** - LLM for content generation
+- **OpenAI GPT-4o** - Advanced language model
+- **SerpAPI** - Research augmentation
+- **IMGBB** - Image hosting
+- **Social Media APIs** - Platform integrations
 
----
+## 📦 Installation
 
-## 📌 Supported Platforms
+### Option 1: n8n Cloud
+1. Create account at [n8n.io](https://n8n.io)
+2. Import the workflow JSON
+3. Configure credentials
+4. Add environment variables
 
-- LinkedIn (Organization Post)
-- Instagram (Graph API)
-- Facebook (Graph API)
-- X (Twitter)
-- TikTok (Structured Content Output)
-- Threads (Structured Content Output)
-- YouTube Shorts (Structured Content Output)
+### Option 2: Docker (Production)
 
----
+```bash
+# Clone the repository
+git clone https://github.com/Abhishekj9621/Social-Media-Workflow.git
+cd Social-Media-Workflow
 
-## 🔄 Workflow Architecture
+# Create .env file
+cp .env.example .env
 
-### 1️⃣ Form Trigger
-User submits:
-- Topic
-- Optional keywords
-- Optional link
+# Edit .env with your API keys
+nano .env
 
-### 2️⃣ AI Content Agent
-- Google Gemini (Primary LLM)
-- OpenAI GPT-4o
-- SerpAPI (Research Augmentation)
-- Structured JSON Output Parser
-
-Generates platform-optimized content for:
-- LinkedIn
-- Instagram
-- Facebook
-- X
-- TikTok
-- Threads
-- YouTube Shorts
-
-### 3️⃣ Image Generation
-- OpenAI image generation
-- Prompt derived from generated content
-
-### 4️⃣ Image Hosting
-- Upload to IMGBB using API
-
-### 5️⃣ Approval Gate
-- Boolean approval check before publishing
-
-### 6️⃣ Auto Publishing
-- Instagram media publish
-- Facebook photo post
-- LinkedIn organization image post
-- X text post
-
----
-
-## 🧩 Key Features
-
-- Structured JSON schema enforcement
-- Multi-LLM hybrid design
-- Platform-specific tone optimization
-- Automated hashtag generation
-- Conditional publishing logic
-- Modular merge node architecture
-- Secure environment variable handling
-
----
-
-## 🔐 Environment Variables (Required)
-
-⚠️ Never hardcode API keys inside the workflow JSON.
-
-Create a `.env` file:
-
-```
-IMGBB_API_KEY=your_imgbb_key_here
-OPENAI_API_KEY=your_openai_key_here
-SERPAPI_API_KEY=your_serpapi_key_here
+# Start services
+docker-compose up -d
 ```
 
-Use in HTTP node:
+## 🚀 Quick Start
+
+1. Set up n8n instance
+2. Import workflow from JSON file
+3. Configure all required credentials
+4. Add API keys to environment variables
+5. Submit topic via form
+6. Review generated content
+7. Approve and publish
+
+## 📁 Project Structure
 
 ```
-={{ $env.IMGBB_API_KEY }}
-```
-
-If using n8n Cloud:
-
-```
-={{ $vars.IMGBB_API_KEY }}
-```
-
----
-
-## 🛠 Required Credentials in n8n
-
-Configure the following credentials inside n8n:
-
-- OpenAI API
-- Google Gemini API
-- SerpAPI
-- Twitter OAuth2
-- Facebook Graph API
-- LinkedIn API
-
----
-
-## 📂 Recommended Project Structure
-
-```
-n8n-ai-social-automation/
-│
+Social-Media-Workflow/
 ├── workflows/
-│   └── final-project.json
-│
+│   └── social-media-automation.json
 ├── .env.example
+├── docker-compose.yml
 ├── README.md
 └── .gitignore
 ```
 
----
-
-## 🚀 Deployment Options
-
-### Option 1 — n8n Cloud
-- Import workflow JSON
-- Configure credentials
-- Add environment variables in Settings → Variables
-
-### Option 2 — Docker (Recommended for Production)
+## 🔄 Workflow Architecture
 
 ```
-docker-compose up -d
+Form Trigger (Topic Input)
+        ↓
+AI Content Agent (Gemini + GPT-4o)
+        ↓
+Platform-Specific Content Generation
+├── LinkedIn (Professional tone)
+├── Instagram (Visual storytelling)
+├── Facebook (Community-based)
+├── Twitter (Concise)
+├── TikTok (Short video)
+├── Threads (Conversational)
+└── YouTube Shorts (Tutorial)
+        ↓
+Image Generation (OpenAI)
+        ↓
+Image Hosting (IMGBB)
+        ↓
+Approval Gate (Boolean check)
+        ↓
+Auto Publishing to All Platforms
 ```
 
-Ensure `.env` is configured properly before running.
+## 🔧 Core Components
 
----
+### AI Content Agent
+- Multi-LLM hybrid design
+- Structured JSON output
+- Platform-specific tone optimization
+- Automated hashtag generation
 
-## 📊 Platform Strategy Summary
+### Image Generation
+- OpenAI image generation
+- Prompt derived from content
+- Automated formatting
 
-| Platform  | Tone              | Format                | CTA Strategy         |
-|-----------|------------------|-----------------------|----------------------|
-| LinkedIn  | Professional      | 3–4 sentences         | Comment-driven       |
-| Instagram | Visual storytelling | Short caption + hashtags | Engagement-focused |
-| Facebook  | Community-based   | Conversational post   | Share & comment      |
-| X         | Concise           | <150 characters       | Reply/Retweet        |
-| TikTok    | Short demo video  | 15–60 sec script      | Follow for tips      |
-| Threads   | Conversational    | Discussion-style      | Question-based       |
-| YouTube Shorts | Tutorial-driven | Under 60 seconds   | Subscribe CTA        |
+### Publishing Engine
+- Multi-platform simultaneous publishing
+- Error handling and retry logic
+- Status tracking
 
----
+## 💻 Environment Variables
+
+Create `.env` file:
+
+```env
+# OpenAI
+OPENAI_API_KEY=sk-xxx
+
+# Google
+GOOGLE_API_KEY=xxx
+
+# SerpAPI
+SERPAPI_API_KEY=xxx
+
+# IMGBB
+IMGBB_API_KEY=xxx
+
+# Social Media Credentials
+TWITTER_API_KEY=xxx
+FACEBOOK_TOKEN=xxx
+LINKEDIN_TOKEN=xxx
+INSTAGRAM_TOKEN=xxx
+```
+
+## 📊 Platform Configuration
+
+| Platform | Tone | Format | CTA |
+|----------|------|--------|-----|
+| LinkedIn | Professional | 3-4 sentences | Comment-driven |
+| Instagram | Visual storytelling | Caption + hashtags | Engagement |
+| Facebook | Community | Conversational | Share & comment |
+| Twitter | Concise | <150 chars | Reply/Retweet |
+| TikTok | Trendy | 15-60 sec script | Follow tips |
+| Threads | Conversational | Discussion-style | Questions |
+| YouTube Shorts | Tutorial | <60 seconds | Subscribe |
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/improvement`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/improvement`)
+5. Open a Pull Request
 
 ## ⚠️ Security Best Practices
 
-- Do NOT commit `.env`
+- Never commit `.env` file
 - Add `.env` to `.gitignore`
-- Regenerate any exposed API keys
+- Regenerate exposed API keys immediately
 - Use environment variables for all secrets
-- Never push real credentials to GitHub
-
----
+- Rotate credentials regularly
 
 ## 🔮 Future Enhancements
 
+- Content calendar
+- A/B testing
+- Performance analytics
+- Multi-client support
+- SaaS dashboard
 - Scheduling layer
-- Auto content calendar
-- Performance analytics loop
-- A/B caption testing
-- Multi-client architecture
-- SaaS dashboard wrapper
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👤 Author
+
+**Abhishek Jaiswal**  
+Email: aj962143@gmail.com
 
 ---
 
-## 📜 License
-
-MIT License
-
----
-
-## 👨‍💻 Built With
-
-- n8n
-- OpenAI
-- Google Gemini
-- SerpAPI
-- IMGBB
-- Social Media Graph APIs
+For more information and documentation, visit the [GitHub repository](https://github.com/Abhishekj9621/Social-Media-Workflow)
